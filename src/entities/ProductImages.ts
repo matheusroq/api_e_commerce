@@ -1,9 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Products } from './Products';
 
 @Entity('product_images')
 class ProductImages {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('increment')
   readonly id: number;
 
   @Column()

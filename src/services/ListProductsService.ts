@@ -14,7 +14,8 @@ export class ListProductsService {
 
     const productAndImages = products.map(async (product, index) => {
       if (product.id) {
-        const images = await productImagesrepo.findByIds(product[index].id);
+        console.log(product.id)
+        const images = await productImagesrepo.find({ product_id: product.id });
         return {
           product,
           images
