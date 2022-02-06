@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { ListProductsService } from '../services/ListProductsService';
 
 export class ListProductsController {
-  async handler(request: Request, response: Response) {
+  async handle(request: Request, response: Response) {
     try {
       const listProductService = new ListProductsService();
       const listProducts = await listProductService.execute();
