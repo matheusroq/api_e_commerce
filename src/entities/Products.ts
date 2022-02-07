@@ -19,6 +19,10 @@ class Products {
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category
+
+  @Column()
+  description: string;
+
   constructor() {
     if (!this.id) {
       this.id = uuid();
