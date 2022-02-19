@@ -7,14 +7,17 @@ interface ProductsAndImages {
   images: ProductImages[];
 }
 export class ListProductsService {
-  async execute(): Promise<ProductsAndImages[]> {
+  async execute(searchTerm?: string): Promise<ProductsAndImages[]> {
     const productRepo = getRepository(Products);
-    const products = await productRepo.find();
+    let products = await productRepo.find();
+
+    if (searchTerm) {
+      products = await productRepo.createQueryBuilder('products').where(`name LIKE :name`, { name: `%${searchTerm}%` }).getMany();
+    }
     const productImagesrepo = getRepository(ProductImages);
 
-    const productAndImages = products.map(async (product, index) => {
+    const productAndImages = products.map(async (product) => {
       if (product.id) {
-        console.log(product.id)
         const images = await productImagesrepo.find({ product_id: product.id });
         return {
           product,
